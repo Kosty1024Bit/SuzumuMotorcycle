@@ -1,0 +1,41 @@
+{
+  "mod_name": "SuzumuMotorcycle",
+  "display_name": "Мотоцикл Suzumu",
+  "game_version_requested": "Conan Exiles Enhanced 3.0.1",
+  "devkit_engine_version": "5.8.2-378787",
+  "horse_mechanics": {
+    "single_rider": true,
+    "inventory_slots": 10,
+    "initial_attributes": 15,
+    "growth": "inherit horse",
+    "interaction": "inherit horse",
+    "ride_immediately_after_placement": true
+  },
+  "movement": {
+    "normal_kmh": 60,
+    "normal_cm_per_second": 1666.666666666667,
+    "sprint_kmh": 120,
+    "sprint_cm_per_second": 3333.333333333333,
+    "maximum_stamina": 1600,
+    "sprint_stamina_per_second": 1,
+    "fall_damage_multiplier": 0.5
+  },
+  "recipe": {
+    "station": "Artisan's Worktable",
+    "ingredients": [
+      {"requested_name": "закаленная сталь", "candidate_english_name": "Hardened Steel Bar", "quantity": 200},
+      {"requested_name": "дубленая кожа", "candidate_english_name": "Hardened Leather", "quantity": 50},
+      {"requested_name": "стальные рамы", "candidate_english_name": "Steel Reinforcement", "quantity": 100}
+    ]
+  },
+  "feat": {
+    "minimum_level": 40,
+    "cost": 25,
+    "branch": "Survival",
+    "parent": "Apprentice Tinker"
+  },
+  "model": {
+    "fbx": "../Suzumu Bike 3D Model/CQ77Z1SHGEKYVB0JPDH2Y9QG1_FBX/CQ77Z1SHGEKYVB0JPDH2Y9QG1.fbx",
+    "blend": "../Suzumu Bike 3D Model/CQ77Z1SHGEKYVB0JPDH2Y9QG1_blend.blend"
+  }
+}

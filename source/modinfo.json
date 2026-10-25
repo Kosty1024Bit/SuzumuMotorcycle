@@ -1,0 +1,20 @@
+{
+  "minimumVersion": "Enhanced",
+  "steamTestLivePublishedFileId": "",
+  "versionMinor": 1,
+  "requestedHttpOrigins": [],
+  "devkitRevisionNumber": 1002,
+  "authorUrl": "",
+  "author": "Local mod project",
+  "name": "Suzumu Motorcycle",
+  "bRequiresLoadOnStartup": false,
+  "folderName": "SuzumuMotorcycle",
+  "versionBuild": 0,
+  "changeNote": "Initial local development build.",
+  "devkitSnapshotId": 0,
+  "versionMajor": 0,
+  "description": "Single rider motorcycle built on horse mechanics.",
+  "steamWorkshopFileIds": {},
+  "steamVisibility": 2,
+  "steamPublishedFileId": ""
+}
