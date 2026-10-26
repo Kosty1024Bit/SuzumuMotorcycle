@@ -59,3 +59,17 @@ Probe real horse classes, mount tables, item/recipe/feat schemas and headless ed
 - Final corrected import and all 27 checks completed with commandlet exit code 0 at 19:45 UTC.
 - Retail executable numeric file/product version fields are 5.8.2.0, independently confirming the game's engine matches Dev Kit UE 5.8.2 (only changelists differ).
 - `um publish check source --game <install>` passes: 37 files, zero failures and warnings. No publishing performed.
+
+## 2026-10-26: visual correction 0.1.1
+- User verified normal riding/controls and requested only the inverted mesh and floating rider fix; no further riding tests.
+- Retail package was accepted after stamping the installed SDK ModVersion 1002 into devkitRevisionNumber. The installer now reactivates a modlist line commented out by the game's incompatible-mod dialog.
+- Actual mesh uses InterchangeAssetImportData. Despite the earlier FBX option change, tyre vertices remained above the seat. Correct the component itself: explicit Roll=180 and Z=27.398354; repeat the transform in Construction Script for loaded instances.
+- Added an original post-process AnimBP using InputPose -> LocalToComponent -> ModifyBone -> ComponentToLocal -> Output. Only b_attachrider receives component translation (0,-10,-110) cm; all other bones retain the supplied pose.
+- Native SetOverridePostProcessAnimBP applies the AnimBP only to this mod's hidden mesh component. No horse asset duplication, global skeleton modification, player-class patch, or locomotion replacement.
+- Evaluated the AnimBP against the actual horse skeleton with AnimPoseExtensions. Attachment displacement matches within 0.01 cm; b_root, b_saddle and b_pelvis are unchanged. Actual transformed geometry has both tyres at ground and the seat above their tops.
+- Important pin parsing: Blueprint Rotator defaults require canonical CSV `0,0,180`; `(Pitch=0,Yaw=0,Roll=180)` was accepted as a string but evaluated to zero rotation. Numeric vertex checks caught this before packaging.
+- AutomationLibrary.take_high_res_screenshot blocked inside a Slate callback. Saved assets first, stopped only the task's editor PID, and switched the visual preview to SceneCapture2D / render target export.
+- Render confirmed the motorcycle is upright. The standalone preview actor is not a mounted game player, so its position is not used as evidence of gameplay seating; the seat correction is verified by actual AnimBP evaluation and geometry coordinates.
+- Official three-platform cook/package completed with exit code 0; no cook errors. Source lint passes: 38 files, zero failures/warnings. Target field note validation passes.
+- Installed 0.1.1 at 2026-10-26 19:17 Moscow. SHA256: 9360F2996916835CC737EF2F09C4E2564FCBB12E897D26717479C5EDB95AB314. Previous pak/modlist preserved in private/install-backup-20261026-191730.
+- Dev Kit was closed; retail game was not relaunched and no additional riding/input tests were performed.

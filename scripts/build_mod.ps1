@@ -14,7 +14,7 @@ $sdkConfig=[System.IO.File]::ReadAllText((Join-Path $DevKit 'UE4\Config\DefaultG
 $revisionMatch=[regex]::Match($sdkConfig,'(?m)^ModVersion=(\d+)\s*$')
 if (-not $revisionMatch.Success) { throw 'Installed SDK ModVersion is missing.' }
 $modInfoPath=Join-Path $modRoot 'modinfo.json'
-$modInfo=Get-Content -LiteralPath $modInfoPath -Raw | ConvertFrom-Json
+$modInfo=Get-Content -LiteralPath (Join-Path $workspaceRoot 'source\modinfo.json') -Raw | ConvertFrom-Json
 $modInfo.devkitRevisionNumber=[int]$revisionMatch.Groups[1].Value
 $modInfo.devkitSnapshotId=0
 $modInfo | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $modInfoPath -Encoding utf8

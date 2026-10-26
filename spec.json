@@ -1,6 +1,7 @@
 {
   "mod_name": "SuzumuMotorcycle",
   "display_name": "Мотоцикл Suzumu",
+  "mod_version": "0.1.1",
   "game_version_requested": "Conan Exiles Enhanced 3.0.1",
   "devkit_engine_version": "5.8.2-378787",
   "horse_mechanics": {
@@ -36,6 +37,11 @@
   },
   "model": {
     "fbx": "../Suzumu Bike 3D Model/CQ77Z1SHGEKYVB0JPDH2Y9QG1_FBX/CQ77Z1SHGEKYVB0JPDH2Y9QG1.fbx",
-    "blend": "../Suzumu Bike 3D Model/CQ77Z1SHGEKYVB0JPDH2Y9QG1_blend.blend"
+    "blend": "../Suzumu Bike 3D Model/CQ77Z1SHGEKYVB0JPDH2Y9QG1_blend.blend",
+    "body_relative_roll_degrees": 180,
+    "body_relative_z_cm": 27.398354,
+    "rider_attachment_bone": "b_attachrider",
+    "rider_offset_actor_cm": [-10, 0, -110],
+    "rider_offset_component_cm": [0, -10, -110]
   }
 }

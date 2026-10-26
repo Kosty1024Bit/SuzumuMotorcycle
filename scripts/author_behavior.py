@@ -64,7 +64,10 @@ if visual is None:
     visual=S.get_associated_object(S.get_data(handle))
 assert visual
 visual.set_editor_property('static_mesh',u.load_asset(LOCAL+'/Art/SM_SuzumuMotorcycle'))
-visual.set_editor_property('relative_location',u.Vector(0,0,-96))
+# Interchange kept the original inverted vertex data on FBX reimport. Correct
+# the actual component transform explicitly; tyres remain at capsule bottom.
+visual.set_editor_property('relative_location',u.Vector(0,0,27.398354))
+visual.set_editor_property('relative_rotation',u.Rotator(pitch=0,yaw=0,roll=180))
 visual.set_collision_profile_name('NoCollision')
 visual.set_editor_property('mobility',u.ComponentMobility.MOVABLE)
 
@@ -75,6 +78,19 @@ ed.remove_nodes([n for n in nodes if n not in keep])
 entry=next(n for n in keep if n.get_class().get_name()=='K2Node_FunctionEntry')
 parents=[n for n in keep if n.get_class().get_name()=='K2Node_CallParentFunction']
 last=out(parents[0],'then') if parents else out(entry,'then')
+body_getter=ed.add_get_member_variable_node('SuzumuBody')
+for function,pin,value in [('K2_SetRelativeRotation','NewRotation','0,0,180'),('K2_SetRelativeLocation','NewLocation','0,0,27.398354')]:
+    node=call(ed,'/Script/Engine.SceneComponent:'+function)
+    link(out(body_getter,'SuzumuBody'),inp(node,'self')); literal(node,pin,value)
+    literal(node,'bSweep','false'); literal(node,'bTeleport','true')
+    link(last,inp(node,'execute')); last=out(node,'then')
+mesh_getter=ed.add_get_member_variable_node('Mesh')
+seat_pose=u.load_asset(LOCAL+'/ABP_SuzumuSeatOffset'); assert seat_pose
+node=call(ed,'/Script/Engine.SkeletalMeshComponent:SetOverridePostProcessAnimBP')
+link(out(mesh_getter,'Mesh'),inp(node,'self'))
+literal(node,'InPostProcessAnimBlueprint',seat_pose.generated_class().get_path_name())
+literal(node,'ReinitAnimInstances','false')
+link(last,inp(node,'execute')); last=out(node,'then')
 for member in ['Mesh','Mane','Tail','Penis','Testicles']:
     getter=ed.add_get_member_variable_node(member)
     assert getter,member
